@@ -3,7 +3,11 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "hashicorp/bionic64"
+  config.vm.box = "xoan/bionic64"
+
+  # evitamos actualizacións automáticas
+  config.vm.box_check_update = false
+  config.vbguest.auto_update = false
 
   # script de aprovisionamento común
   config.vm.provision :shell, path: "bootstrap.sh"
@@ -22,7 +26,7 @@ Vagrant.configure("2") do |config|
 
   # VM master
   config.vm.define "XXXXXXXXXX-master" do |master|
-    master.vm.network "private_network", ip: "193.168.1.2"
+    master.vm.network "private_network", ip: "192.168.1.2"
     # darlle un nome ao nó
     master.vm.provision "shell", inline: <<-SHELL
       hostnamectl set-hostname XXXXXXXXXX-master
@@ -31,7 +35,7 @@ Vagrant.configure("2") do |config|
 
   # VM slave
   config.vm.define "XXXXXXXXXX-slave" do |slave|
-    slave.vm.network "private_network", ip: "193.168.1.3"
+    slave.vm.network "private_network", ip: "192.168.1.3"
     # darlle un nome ao nó
     slave.vm.provision "shell", inline: <<-SHELL
       hostnamectl set-hostname XXXXXXXXXX-slave
@@ -40,7 +44,7 @@ Vagrant.configure("2") do |config|
 
   # VM spare
   config.vm.define "XXXXXXXXXX-spare" do |spare|
-    spare.vm.network "private_network", ip: "193.168.1.4"
+    spare.vm.network "private_network", ip: "192.168.1.4"
     # darlle un nome ao nó
     spare.vm.provision "shell", inline: <<-SHELL
       hostnamectl set-hostname XXXXXXXXXX-spare
