@@ -10,9 +10,10 @@ Vagrant.configure("2") do |config|
   config.vbguest.auto_update = false
 
   # Activamos a opcion de linked clones para optimizar o espazo usado polos discos
-  # As 3 VMs comparten o disco dunha imaxe base e en cada unha sÃ se almacenan os cambios
+  # As 3 VMs comparten o disco dunha imaxe base e en cada unha sï¿½ se almacenan os cambios
   config.vm.provider :virtualbox do |vb|
     vb.linked_clone = true
+    vb.cpus = 2
   end
 
   # Definicion dosnos do cluster
@@ -22,32 +23,32 @@ Vagrant.configure("2") do |config|
   ###############################################################
 
   # VM master
-  config.vm.define "XXXXXXXXXX-master" do |master|
+  config.vm.define "igc2223-master" do |master|
     master.vm.network "private_network", ip: "192.168.56.2"
     # aprovisionar o master
     master.vm.provision "shell" do |s|
       s.path = "bootstrap.sh"
-      s.args = ["XXXXXXXXXX-master"]
+      s.args = ["igc2223-master"]
     end
   end
 
   # VM slave
-  config.vm.define "XXXXXXXXXX-slave" do |slave|
+  config.vm.define "igc2223-slave" do |slave|
     slave.vm.network "private_network", ip: "192.168.56.3"
     # aprovisionar o slave
     slave.vm.provision "shell" do |s|
       s.path = "bootstrap.sh"
-      s.args = ["XXXXXXXXXX-slave"]
+      s.args = ["igc2223-slave"]
     end
   end
 
   # VM spare
-  config.vm.define "XXXXXXXXXX-spare" do |spare|
+  config.vm.define "igc2223-spare" do |spare|
     spare.vm.network "private_network", ip: "192.168.56.4"
     # aprovisionar o spare
     spare.vm.provision "shell" do |s|
       s.path = "bootstrap.sh"
-      s.args = ["XXXXXXXXXX-spare"]
+      s.args = ["igc2223-spare"]
     end
   end
 
