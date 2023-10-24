@@ -5,17 +5,17 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "xoan/Leap-15.4"
 
-  # evitamos actualizacions autoaticas
+  # evitamos actualizacions automaticas
   config.vm.box_check_update = false
   config.vbguest.auto_update = false
 
   # Activamos a opcion de linked clones para optimizar o espazo usado polos discos
-  # As 3 VMs comparten o disco dunha imaxe base e en cada unha s√ se almacenan os cambios
+  # As 3 VMs comparten o disco dunha imaxe base e en cada unha so se almacenan os cambios
   config.vm.provider :virtualbox do |vb|
     vb.linked_clone = true
   end
 
-  # Definicion dosnos do cluster
+  # Definicion dos nos do cluster
 
   ###################### IMPORTANTE #############################
   # Cambia os nomes das VM para usar a nomenclatura das practicas 
